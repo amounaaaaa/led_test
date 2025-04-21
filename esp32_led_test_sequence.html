@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2rem; }
+    .led { display:inline-block;
+           width:2rem; height:2rem; margin:0.5rem;
+           border-radius:50%;
+           background:#444; 
+           box-shadow: inset -2px -2px 5px black;
+    }
+    .on { background:#e00; box-shadow: 0 0 20px #e00; }
+    button { font-size:1.2rem; padding:0.5rem 1rem; }
+  </style>
+  <title>ESP32 LED Tester Preview - Sequence</title>
+</head>
+<body>
+  <h1>ESP32 LED Tester (Sequence)</h1>
+  <button id="btn">Press me</button>
+  <div>
+    <div id="led0" class="led"></div>
+    <div id="led1" class="led"></div>
+    <div id="led2" class="led"></div>
+  </div>
+
+  <script>
+    let pressCount = 0;
+    document.getElementById('btn').onclick = () => {
+      pressCount = (pressCount % 3) + 1;  // cycles 1,2,3,1,...
+      const idx = pressCount - 1;
+      [0,1,2].forEach(i => {
+        document.getElementById('led'+i).classList.remove('on');
+      });
+      document.getElementById('led'+idx).classList.add('on');
+    };
+  </script>
+</body>
+</html>
